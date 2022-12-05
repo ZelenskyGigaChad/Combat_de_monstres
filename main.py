@@ -15,6 +15,7 @@ combat_perdu = 0
 combats = 0
 lancer_de_des = 0
 victoire_consecutives = 0
+truc_de_regle = True
 
 #ON cree notre fonction de combat
 def combat():
@@ -63,40 +64,52 @@ def quitter():
     global jouer
     jouer = False
 
-#On commence notre boucle
-while jouer:
-    if combat_gagnee == 3:
+def creation():
+    global force_adversaire
+    if combat_gagnee >= 3:
         force_adversaire = random.randint(2, 6)
     else:
         force_adversaire = random.randint(1,5)
-
+#On commence notre boucle
+regle = True
+while jouer:
     if niveau_vie <= 0:
         print('Vous avez perdu la partie')
         jouer = False
 
+    if regle:
+        creation()
     print("Vous tombez face à face avec un adversaire de difficulté :", force_adversaire)
     numero_adversaire += 1
-    choix = input("Que voulez-vous faire ? "
-                  "\n1- Combattre cet adversaire"
-                  "\n2- Contourner cet adversaire et aller ouvrir une autre porte"
-                  "\n3- Afficher les règles du jeu"
-                  "\n4- Quitter la partie "
-                  "\nVotre choix : ")
-#On cree toutes les options de repsonse
+    choix = input("Que voulez-vous faire ?"
+                      "\n1- Combattre cet adversaire"
+                      "\n2- Contourner cet adversaire et aller ouvrir une autre porte"
+                      "\n3- Afficher les règles du jeu"
+                      "\n4- Quitter la partie "
+                      "\nVotre choix : ")
+
+    #On cree toutes les options de repsonses
     if choix == "1":
-        combat()
+            combat()
+            regle = True
 
     elif choix == "2":
-        contourner()
+            contourner()
+            regle = True
 
     elif choix == "3":
         print("Pour réussir un combat, il faut que la valeur du dé lancé soit supérieure à la force de l’adversaire.  "
-              "\nDans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire."
-              "\nUne défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.  "
-              "\nDans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire."
-              "\nLa partie se termine lorsque les points de vie de l’usager tombent sous 0."
-              "\nL’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie."
-              "\n")
+                "\nDans ce cas, le niveau de vie de l’usager est augmenté de la force de l’adversaire."
+                "\nUne défaite a lieu lorsque la valeur du dé lancé par l’usager est inférieure ou égale à la force de l’adversaire.  "
+                "\nDans ce cas, le niveau de vie de l’usager est diminué de la force de l’adversaire."
+                "\nLa partie se termine lorsque les points de vie de l’usager tombent sous 0."
+                "\nL’usager peut combattre ou éviter chaque adversaire, dans le cas de l’évitement, il y a une pénalité de 1 point de vie."
+                "\n")
+        regle = False
+
     elif choix == "4":
         quitter()
 
+    elif choix != "4" or "3" or "2" or "1":
+        regle = False
+        print('Veulliller entrer qq chose de valide')
