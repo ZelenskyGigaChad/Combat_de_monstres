@@ -112,4 +112,4 @@ while jouer:
 
     elif choix != "4" or "3" or "2" or "1":
         regle = False
-        print('Veulliller entrer qq chose de valide')
+        print('Veulliller entrer une valeure valide')
