@@ -67,9 +67,9 @@ def quitter():
 def creation():
     global force_adversaire
     if combat_gagnee >= 3:
-        force_adversaire = random.randint(2, 6)
+        force_adversaire = random.randint(4, 12)
     else:
-        force_adversaire = random.randint(1,5)
+        force_adversaire = random.randint(1,6)
 #On commence notre boucle
 regle = True
 while jouer:
